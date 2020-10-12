@@ -1,7 +1,5 @@
 library(shinydashboard)
 library(plotly)
-library(numberFormattR)
-library(astsa)
 
 
 header <- dashboardHeader(title = "Covid19 Morocco", tags$li(a(href = 'https://www.linkedin.com/in/mohamed-aghezzaf/', icon("linkedin"), title = "LinkedIn"), class = "dropdown"),  tags$li(a(href = 'https://github.com/aghezzafmohamed', icon("github"), title = "My Github account"), class = "dropdown"))  

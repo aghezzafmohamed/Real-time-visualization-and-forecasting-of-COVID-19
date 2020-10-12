@@ -4,7 +4,6 @@ Application for real-time visualization and forecasting of COVID-19, data on the
 
 ## Dashboard
 <p>Visualization of covide-19</p>
-<b>
 <img src="dashboard.png">
 
 ###	Authentification

@@ -1,6 +1,5 @@
-library(shinydashboard)
-library(plotly)
 library(ggfortify)
+library(numberFormattR)
 library(forecast)
 source("Covid19_stream.R")
 

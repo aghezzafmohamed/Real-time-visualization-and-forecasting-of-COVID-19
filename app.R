@@ -35,7 +35,7 @@ replace_na_with_previous<-function (vector) {
 }
 
 df_Cases <- Scripting_Cases("https://services3.arcgis.com/hjUMsSJ87zgoicvl/arcgis/rest/services/Covid_19/FeatureServer/5/query?where=1%3D1&outFields=*&outSR=4326&f=json")
-
+df_Cases <- df_Cases[-c(nrow(df_Cases)),]
 number <- c(tail(df_Cases$Cas_confirmés, 1), tail(df_Cases$Décédés , 1), tail(df_Cases$Negative_tests, 1), tail(df_Cases$Tested, 1), tail(df_Cases$Retablis , 1))
 Case <- c("Cas confirmés ", "Décédés ", "Negative tests", "Tested", "Retablis")
 matrix <- data.frame(Case, number)
@@ -155,7 +155,7 @@ body <- dashboardBody(
               br(),
               p("Application for real-time visualization and forecasting of COVID-19, data on the number of patients diagnosed, the number of patients who died and the number of patients cured. These figures are based on information from the Geomatic API, Morocco.", style = "font-family: 'times'; font-size : 16pt"),
               br(),
-              strong("Last update"),strong("23/09/2020"),
+              strong("Last update"), strong(tail(df_Cases$Date, 1),
               br(),
               a(href = 'https://services3.arcgis.com/hjUMsSJ87zgoicvl/arcgis/rest/services/Covid_19/FeatureServer/5/query?where=1%3D1&outFields=*&outSR=4326&f=json', icon("link"), title = "My Github account"),
               strong("API Link"),

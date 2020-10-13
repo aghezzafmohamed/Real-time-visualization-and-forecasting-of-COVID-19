@@ -3,7 +3,7 @@
 # Example R code to install packages if not already installed
 #
 
-my_packages = c("forecast", "numberFormattR", "forecast", "shinydashboard", "plotly", "data.table", "lubridate", "tibble", "jsonlite", "httr")
+my_packages = c("forecast", "numberFormattR", "ggfortify", "shinydashboard", "plotly", "data.table", "lubridate", "tibble", "jsonlite", "httr")
 
 install_if_missing = function(p) {
   if (p %in% rownames(installed.packages()) == FALSE) {

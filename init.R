@@ -10,5 +10,8 @@ install_if_missing = function(p) {
     install.packages(p)
   }
 }
+if (!requireNamespace("devtools", quietly = TRUE))
+  install.packages("devtools")
+devtools::install_github('mraess/numberFormattR')
 
 invisible(sapply(my_packages, install_if_missing))

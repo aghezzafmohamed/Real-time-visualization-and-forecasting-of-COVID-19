@@ -1,6 +1,6 @@
 # Real-time-visualization-and-forecasting-of-COVID-19
 
-<a href="https://covide19-morocco.herokuapp.com"><h2>Live demo</h2><a/> <br>
+<a href="https://covid-19morocco.herokuapp.com"><h2>Live demo</h2><a/> <br>
 
 Application for real-time visualization and forecasting of COVID-19, data on the number of patients diagnosed, the number of patients who died and the number of patients cured. These figures are based on information from the Geomatic API, Morocco.
 

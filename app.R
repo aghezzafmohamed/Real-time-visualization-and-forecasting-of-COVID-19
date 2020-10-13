@@ -70,7 +70,7 @@ Actuel <- c(df_Cases["Cas_confirmés"][1:nrow(df_sarima["Sarima"]),])
 df_data <- data.frame(Date, Sarima, Tbats, Actuel)
 
 
-header <- dashboardHeader(title = "Covid19 Morocco", tags$li(a(href = 'https://www.linkedin.com/in/mohamed-aghezzaf/', icon("linkedin"), title = "LinkedIn"), class = "dropdown"),  tags$li(a(href = 'https://github.com/aghezzafmohamed', icon("github"), title = "My Github account"), class = "dropdown"))  
+header <- dashboardHeader(title = "Covid19 Morocco", tags$li(a(href = 'https://www.linkedin.com/in/mohamed-aghezzaf/', icon("linkedin"), title = "My LinkedIn account"), class = "dropdown"),  tags$li(a(href = 'https://github.com/aghezzafmohamed', icon("github"), title = "My Github account"), class = "dropdown"))  
 sidebar <- dashboardSidebar(
   collapsed = TRUE,
   sidebarMenu(
@@ -164,7 +164,7 @@ body <- dashboardBody(
               a(href = 'https://github.com/aghezzafmohamed', icon("github"), title = "My Github account"),
               strong("My Github account"),
               br(),
-              a(href = 'https://www.linkedin.com/in/mohamed-aghezzaf/', icon("linkedin"), title = "LinkedIn"),
+              a(href = 'https://www.linkedin.com/in/mohamed-aghezzaf/', icon("linkedin"), title = "My LinkedIn account"),
               strong("My LinkedIn account"),
               br(),
             )

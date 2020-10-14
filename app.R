@@ -76,7 +76,7 @@ sidebar <- dashboardSidebar(
   sidebarMenu(
     menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
     menuItem("Forecasting", tabName = "forecasting", icon = icon("fas fa-chart-line")),
-    menuItem("À propos", tabName = "about", icon = icon("fad fa-info"))
+    menuItem("About", tabName = "about", icon = icon("fad fa-info"))
   )
 )
 body <- dashboardBody(

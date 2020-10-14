@@ -153,7 +153,8 @@ body <- dashboardBody(
             sidebarPanel(img(src = "mohamed.png", height = 160, width = 160), h3("Aghezzaf mohamed"), width = 4),
             mainPanel(
               br(),
-              p("Application for real-time visualization and forecasting of COVID-19, data on the number of patients diagnosed, the number of patients who died and the number of patients cured. These figures are based on information from the Geomatic API, Morocco.", style = "font-family: 'times'; font-size : 16pt"),
+              p("This web application is built using R and Shiny to real-time visualization and forecasting of COVID-19 data (number of confirmed cases, recovered patients, tests, and death). These statistics are based on information collected from an open API.
+The goal is to track COVID-19 data in real-time and to predict the cases by applying TBATS and SARIMA models as well as comparing them.", style = "font-family: 'times'; font-size : 16pt"),
               br(),
               strong("Last update"), strong(tail(df_Cases$Date, 1)),
               br(),

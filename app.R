@@ -158,7 +158,7 @@ The goal is to track COVID-19 data in real-time and to predict the cases by appl
               br(),
               strong("Last update"), strong(tail(df_Cases$Date, 1)),
               br(),
-              a(href = 'https://services3.arcgis.com/hjUMsSJ87zgoicvl/arcgis/rest/services/Covid_19/FeatureServer/5/query?where=1%3D1&outFields=*&outSR=4326&f=json', icon("link"), title = "My Github account"),
+              a(href = 'https://services3.arcgis.com/hjUMsSJ87zgoicvl/arcgis/rest/services/Covid_19/FeatureServer/5/query?where=1%3D1&outFields=*&outSR=4326&f=json', icon("link"), title = "API Link"),
               strong("API Link"),
               br(),
               br(),

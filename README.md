@@ -9,13 +9,16 @@ Application for real-time visualization and forecasting of COVID-19, data on the
 <p>Visualization of covide-19</p>
 <img src="dashboard.png">
 
+
 ###	Authentification
 <p>Forecasting of covide-19 with  TBASTS and SARIMA</p>
 <img src="forecasting.png">
 
+
 ### About
 <p>This window show information about application</p>
 <img src="about.png">
+
 
 ### Contact
 Linkedin: <a href="https://www.linkedin.com/in/mohamed-aghezzaf/">aghezzafmohamed<a/> <br>

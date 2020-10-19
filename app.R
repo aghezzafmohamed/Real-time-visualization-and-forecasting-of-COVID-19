@@ -211,10 +211,9 @@ server <- function(input, output) {
     
     
     output$plot_totale <- renderPlotly({
-      ggplotly(ggplot(data=matrix, aes(x=Case, y=number, fill=Case)) +
+      ggplotly(ggplot(data=matrix, aes(x=Case, y=format(number, scientific=FALSE), fill=Case)) +
                  theme_minimal() +
-                 geom_bar(stat="identity") +
-                 scale_y_continuous(labels = suffix_formatter_0) + ylab("") + 
+                 geom_bar(stat="identity")+ ylab("") + 
                  xlab("") +
                  theme(legend.position="none"))
     })

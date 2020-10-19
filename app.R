@@ -1,5 +1,4 @@
 library(ggfortify)
-library(numberFormattR)
 library(forecast)
 library(httr)
 library(jsonlite)

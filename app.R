@@ -15,7 +15,7 @@ Scripting_Cases <- function (LocationId) {
   df <- as_data_frame(data$features$attributes)
   df$Date <- format(df$Date, scientific=FALSE)
   df$Date <- format(as_datetime(as.numeric(substr(df$Date, 1, nchar(df$Date)-3))), "%d/%m/%Y")
-  df = subset(df, select = -c(OBJECTID,GlobalID) )
+  df = subset(df, select = -c(OBJECTID,x,y) )
   df[]<-lapply(df,replace_na_with_previous)
   colnames(df)[colnames(df) == 'Cumul_des_tests'] <- 'Tested'
 

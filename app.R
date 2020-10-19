@@ -51,16 +51,17 @@ training <- ts(train$Cas_confirmés, start = c(decimal_date(as.Date("2020-03-02"
 tbats_model <- tbats(training)
 tbats_forecast <- forecast(tbats_model, h=length(test$Cas_confirmés))
 df_tbats <- fortify(tbats_forecast, ts.connect = TRUE)
-df_tbats[165,]["Fitted"] <- NA
 df_tbats$Index <- date_decimal(df_tbats$Index)
-df_tbats$Tbats <- rowSums(df_tbats[, c("Fitted","Point Forecast")], na.rm=T)
+names(df_tbats) <- make.names(names(df_tbats))
+df_tbats <- transform(df_tbats, Tbats = pmax(Fitted, Point.Forecast, na.rm = TRUE))
+
 
 sarima_forecast <- auto.arima(training, trace=TRUE, test="kpss", ic="bic")
 sarima_forecast <- forecast(sarima_forecast, h=length(test$Cas_confirmés))
 df_sarima <- fortify(sarima_forecast, ts.connect = TRUE)
 df_sarima$Index <- date_decimal(df_sarima$Index)
-df_sarima[165,]["Fitted"] <- NA
-df_sarima$Sarima <- rowSums(df_sarima[, c("Fitted","Point Forecast")], na.rm=T)
+names(df_sarima) <- make.names(names(df_sarima))
+df_sarima <- transform(df_sarima, Sarima = pmax(Fitted, Point.Forecast, na.rm = TRUE))
 
 
 Date <- c(df_tbats$Index)

@@ -7,7 +7,7 @@ library(lubridate)
 library(shinydashboard)
 library(plotly)
 
-
+# function to connect with the API 
 Scripting_Cases <- function (LocationId) {
   request <- paste0(LocationId)
   text <- content(GET(request), as = "text", encoding = "UTF-8")
@@ -15,13 +15,16 @@ Scripting_Cases <- function (LocationId) {
   df <- as_data_frame(data$features$attributes)
   df$Date <- format(df$Date, scientific=FALSE)
   df$Date <- format(as_datetime(as.numeric(substr(df$Date, 1, nchar(df$Date)-3))), "%d/%m/%Y")
+  # delete unused columns 
   df = subset(df, select = -c(OBJECTID,x,y) )
+  # cleaning data
   df[]<-lapply(df,replace_na_with_previous)
+  # rename column
   colnames(df)[colnames(df) == 'Cumul_des_tests'] <- 'Tested'
 
   return(df)
 }
-
+# function to fill all nan values with last valid values
 replace_na_with_previous<-function (vector) {
   if (is.na(vector[1])) 
     vector[1] <- na.omit(vector)[1]
@@ -36,17 +39,19 @@ replace_na_with_previous<-function (vector) {
 
 df_Cases <- Scripting_Cases("https://services3.arcgis.com/hjUMsSJ87zgoicvl/arcgis/rest/services/Covid_19/FeatureServer/5/query?where=1%3D1&outFields=*&outSR=4326&f=json")
 df_Cases <- df_Cases[-c(nrow(df_Cases)),]
+# compute the number of the last day
 number <- c(tail(df_Cases$Cas_confirmés, 1), tail(df_Cases$Décédés , 1), tail(df_Cases$Negative_tests, 1), tail(df_Cases$Tested, 1), tail(df_Cases$Retablis , 1))
 Case <- c("Cas confirmés ", "Décédés ", "Negative tests", "Tested", "Retablis")
 matrix <- data.frame(Case, number)
-
 numberOfRows <- nrow(df_Cases)
+
+# split our data to 80% %test and 20% train
 bound <- as.integer(numberOfRows *0.8)
 train <- df_Cases[1:bound ,]
 test <- df_Cases[(bound+1):numberOfRows ,]
-
 train <- subset(train, select=c('Date','Cas_confirmés'))
 
+# tbats module 
 training <- ts(train$Cas_confirmés, start = c(decimal_date(as.Date("2020-03-02"))), frequency = 365)
 tbats_model <- tbats(training)
 tbats_forecast <- forecast(tbats_model, h=length(test$Cas_confirmés))
@@ -55,7 +60,7 @@ df_tbats$Index <- date_decimal(df_tbats$Index)
 names(df_tbats) <- make.names(names(df_tbats))
 df_tbats <- transform(df_tbats, Tbats = pmax(Fitted, Point.Forecast, na.rm = TRUE))
 
-
+# sarima module
 sarima_forecast <- auto.arima(training, trace=TRUE, test="kpss", ic="bic")
 sarima_forecast <- forecast(sarima_forecast, h=length(test$Cas_confirmés))
 df_sarima <- fortify(sarima_forecast, ts.connect = TRUE)
@@ -63,13 +68,12 @@ df_sarima$Index <- date_decimal(df_sarima$Index)
 names(df_sarima) <- make.names(names(df_sarima))
 df_sarima <- transform(df_sarima, Sarima = pmax(Fitted, Point.Forecast, na.rm = TRUE))
 
-
+# join sarima, actual modules in the same dataframe
 Date <- c(df_tbats$Index)
 Sarima <- c(df_sarima["Sarima"])
 Tbats <- c(df_tbats["Tbats"])
 Actuel <- c(df_Cases["Cas_confirmés"][1:nrow(df_sarima["Sarima"]),])
 df_data <- data.frame(Date, Sarima, Tbats, Actuel)
-
 
 header <- dashboardHeader(title = "Covid19 Morocco", tags$li(a(href = 'https://www.linkedin.com/in/mohamed-aghezzaf/', icon("linkedin"), title = "My LinkedIn account"), class = "dropdown"),  tags$li(a(href = 'https://github.com/aghezzafmohamed', icon("github"), title = "My Github account"), class = "dropdown"))  
 sidebar <- dashboardSidebar(

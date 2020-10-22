@@ -1,5 +1,5 @@
-#install packages if not already installed
 
+# install packages if not already installed
 my_packages = c("forecast", "ggfortify", "shinydashboard", "plotly", "data.table", "lubridate", "tibble", "jsonlite", "httr")
 
 install_if_missing = function(p) {

@@ -6,6 +6,7 @@ library(tibble)
 library(lubridate)
 library(shinydashboard)
 library(plotly)
+library(DT)
 
 # function to connect with the API 
 Scripting_Cases <- function (LocationId) {

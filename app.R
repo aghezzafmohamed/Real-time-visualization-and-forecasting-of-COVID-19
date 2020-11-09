@@ -16,7 +16,10 @@ Scripting_Cases <- function (LocationId) {
   df$Date <- format(df$Date, scientific=FALSE)
   df$Date <- format(as_datetime(as.numeric(substr(df$Date, 1, nchar(df$Date)-3))), "%d/%m/%Y")
   # delete unused columns 
-  df = subset(df, select = -c(OBJECTID,x,y) )
+  df = subset(df, select = -c(OBJECTID,OBJECTID_1,x,y) )
+  df <- df[order(as.Date(df$Date, format="%d/%m/%Y")),]
+  # removing duplicated rows
+  df <- df[!duplicated(df), ]
   # cleaning data
   df[]<-lapply(df,replace_na_with_previous)
   # rename column
